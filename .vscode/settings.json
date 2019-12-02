@@ -1,0 +1,9 @@
+{
+    "cSpell.words": [
+        "ethereum",
+        "id",
+        "wallet"
+    ],
+    "prettier.singleQuote": true,
+    "prettier.jsxSingleQuote": true
+}
