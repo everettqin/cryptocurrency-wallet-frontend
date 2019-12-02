@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="modal-header bg-secondary">
+    <h4 class="modal-title">New user</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="activeModal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body bg-secondary">
+    <formly-form
+      [form]="form"
+      [fields]="fields"
+      [model]="newUser"
+    ></formly-form>
+  </div>
+  <div class="modal-footer bg-secondary">
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
+      Create
+    </button>
+  </div>
+</form>
