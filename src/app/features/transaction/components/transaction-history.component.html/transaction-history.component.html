@@ -1,0 +1,18 @@
+<table class="table align-items-center table-flush">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Event</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let version of versions"> 
+      <th>
+        {{ version?.createdAt | date: 'short' }}
+      </th>
+      <th>
+        {{ version?.event | uppercase }}
+      </th>
+    </tr>
+  </tbody>
+</table>

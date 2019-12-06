@@ -1,9 +1,11 @@
 import { TransactionNewComponent } from './transaction-new/transaction-new.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
+import { TransactionHistoryComponent } from './transaction-history.component.html/transaction-history.component';
 
 export const TRANSACTION_COMPONENTS = [
     TransactionNewComponent,
-    TransactionDetailComponent
+    TransactionDetailComponent,
+    TransactionHistoryComponent
 ];
 
 export const TRANSACTION_ENTRY_COMPONENTS = [
@@ -12,3 +14,4 @@ export const TRANSACTION_ENTRY_COMPONENTS = [
 
 export * from './transaction-new/transaction-new.component';
 export * from './transaction-detail/transaction-detail.component';
+export * from './transaction-history.component.html/transaction-history.component';

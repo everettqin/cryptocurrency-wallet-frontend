@@ -5,18 +5,14 @@ import {
   Input
 } from '@angular/core';
 
+// App
 import { AppBaseComponent, Meta, Transaction, User } from '@app/core';
-import {
-  TransactionDispatchers,
-  TransactionSelectors,
-  UserDispatchers,
-  UserSelectors
-} from '@app/store/services';
+import { UserDispatchers, UserSelectors } from '@app/store/services';
 import { Observable } from 'rxjs';
 
+// Lib
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionNewComponent } from '../../../transaction/components';
-import { TransactionDataService } from '@app/resources';
 
 @Component({
   selector: 'app-user-transactions',
@@ -48,15 +44,23 @@ export class UserTransactionsComponent extends AppBaseComponent
   }
 
   color(transaction: Transaction) {
-    if (transaction.sourceUserId === this.user.id) {
+    if (transaction.sourceUser.identifier === this.user.identifier) {
       return 'success';
     } else {
       return 'danger';
     }
   }
 
+  amountPrefix(transaction: Transaction) {
+    if (transaction.sourceUser.identifier === this.user.identifier) {
+      return '+ ' + transaction.amount;
+    } else {
+      return '- ' + transaction.amount;
+    }
+  }
+
   showName(transaction: Transaction) {
-    if (transaction.sourceUserId === this.user.id) {
+    if (transaction.sourceUser.identifier === this.user.identifier) {
       return transaction.targetUser.name;
     } else {
       return transaction.sourceUser.name;

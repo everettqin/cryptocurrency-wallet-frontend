@@ -1,4 +1,5 @@
 import { User } from './user';
+import { Version } from './version';
 
 export interface Transaction {
   id?: string;
@@ -10,6 +11,7 @@ export interface Transaction {
   sourceUserId: string;
   targetUser?: User;
   targetUserId?: string;
+  versions?: Version;
   processedAt?: Date;
   createdAt?: Date;
   updatedAt?: Date;

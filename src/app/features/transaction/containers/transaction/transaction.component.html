@@ -34,7 +34,9 @@
             <h3 class="mb-0">History</h3>
         </div>
         <div class="card-body pt-0 pt-md-4">
-         
+            <app-transaction-history
+            [versions]="transaction?.versions"
+          ></app-transaction-history>
         </div>
       </div>
     </div>

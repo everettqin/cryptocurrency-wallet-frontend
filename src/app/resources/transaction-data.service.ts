@@ -21,8 +21,11 @@ export class TransactionDataService {
       .pipe(catchError(this.handleError(transaction)));
   }
 
-  getTransactions(page: number, userIdentifier: string = ''): Observable<Response> {
-    let params = new HttpParams().set('page', page.toString())
+  getTransactions(
+    page: number,
+    userIdentifier: string = ''
+  ): Observable<Response> {
+    let params = new HttpParams().set('page', page.toString());
 
     if (userIdentifier.length > 0) {
       params = params.append('userId', userIdentifier);

@@ -3,3 +3,5 @@ export * from './response';
 
 export * from './user';
 export * from './transaction';
+export * from './version';
+

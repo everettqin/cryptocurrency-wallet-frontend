@@ -16,7 +16,7 @@
           {{ showName(transaction) }}
         </th>
         <td class="text-{{ color(transaction) }}">
-          {{ transaction?.amount }}
+          {{ amountPrefix(transaction) }}
         </td>
         <td>
           {{ transaction?.currencyType | uppercase}}

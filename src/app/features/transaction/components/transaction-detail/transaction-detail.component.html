@@ -2,7 +2,7 @@
   <div class="form-group">
     <label class="form-control-label">Source User</label>
     <p>
-      <a [routerLink]="['/inside/users', transaction?.sourceUserId]">{{
+      <a [routerLink]="['/inside/users', transaction?.sourceUser?.identifier]">{{
         transaction?.sourceUser.name
       }}</a>
     </p>
@@ -10,7 +10,7 @@
   <div class="form-group">
     <label class="form-control-label">Target User</label>
     <p>
-      <a [routerLink]="['/inside/users', transaction?.targetUser]">{{
+      <a [routerLink]="['/inside/users', transaction?.targetUser?.identifier]">{{
         transaction?.targetUser.name
       }}</a>
     </p>
