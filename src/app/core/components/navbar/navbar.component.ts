@@ -1,9 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {
-  Location,
-  LocationStrategy,
-  PathLocationStrategy
+  Location
 } from '@angular/common';
 import { Router } from '@angular/router';
 import { AngularTokenService } from 'angular-token';
