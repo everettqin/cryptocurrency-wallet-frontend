@@ -4,11 +4,11 @@ export interface User {
   name: string;
   description: string;
   email: string;
-  bitcoin_wallet_id?: string;
-  bitcoin_wallet_balance?: number;
-  ethereum_wallet_id?: string;
-  ethereum_wallet_balance?: number;
-  max_transaction_limit?: number;
-  created_at?: Date;
-  updated_at?: Date;
+  bitcoinWalletId?: string;
+  bitcoinWalletBalance?: number;
+  ethereumWalletId?: string;
+  ethereumWalletBalance?: number;
+  maxTransactionLimit?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

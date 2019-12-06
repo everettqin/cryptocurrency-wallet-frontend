@@ -11,6 +11,7 @@ import {
 import { FormlyWrapperFormField } from './wrappers/wrappers';
 import { FormControl, ValidationErrors } from '@angular/forms';
 import { emailRegExp } from './utils/email-regex';
+import { FormlyFieldUserSelect } from './types/user-select';
 
 export const FIELD_TYPE_COMPONENTS = [
   // types
@@ -21,6 +22,7 @@ export const FIELD_TYPE_COMPONENTS = [
   FormlyFieldTextArea,
   FormlyFieldMultiCheckbox,
   FormlyFieldUUID,
+  FormlyFieldUserSelect,
 
   // wrappers
   FormlyWrapperFormField
@@ -87,6 +89,11 @@ export const BOOTSTRAP_FORMLY_CONFIG: ConfigOption = {
     {
       name: 'uuid',
       component: FormlyFieldUUID,
+      wrappers: ['form-field']
+    },
+    {
+      name: 'user-select',
+      component: FormlyFieldUserSelect,
       wrappers: ['form-field']
     }
   ],

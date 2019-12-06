@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@ng-bootstrap/ng-bootstrap": "~>5.1.0",
+    "@ng-select/ng-select": "^3.7.0",
     "@ngrx/data": "^8.5.2",
     "@ngrx/effects": "^8.5.2",
     "@ngrx/entity": "^8.5.2",

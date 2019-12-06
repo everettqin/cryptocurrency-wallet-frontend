@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { User, AppBaseComponent } from '@app/core';
 
 // ui
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { UserDispatchers } from '@app/store';
 
 @Component({
@@ -16,7 +16,7 @@ export class UserFormComponent extends AppBaseComponent {
   @Input() user: User;
 
   form = new FormGroup({});
-
+  options: FormlyFormOptions = { };
   fields: FormlyFieldConfig[] = [
     {
       template:

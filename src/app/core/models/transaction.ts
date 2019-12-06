@@ -1,13 +1,18 @@
 import { User } from './user';
+import { Version } from './version';
 
 export interface Transaction {
-  identifier: string;
+  id?: string;
+  identifier?: string;
   amount: number;
-  state: string;
-  type: string;
-  source_user: User;
-  target_user_id: User;
-  processed_at: Date;
-  created_at: Date;
-  updated_at: Date;
+  state?: string;
+  currencyType: string;
+  sourceUser?: User;
+  sourceUserId: string;
+  targetUser?: User;
+  targetUserId?: string;
+  versions?: Version;
+  processedAt?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

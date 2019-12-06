@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import * as UserActions from '../actions';
-import { UserDataService } from '../services';
+import { UserDataService, TransactionDataService } from '@app/resources';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -36,11 +36,11 @@ export class UserEffects {
     )
   );
 
-  getUserSuccess$ = createEffect(
+  updateUserSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(UserActions.getUserSuccess),
-        tap(() => this.toastrService.success('User updated created'))
+        ofType(UserActions.updateUserSuccess),
+        tap(() => this.toastrService.success('User updated successful'))
       ),
     { dispatch: false }
   );
@@ -80,9 +80,29 @@ export class UserEffects {
     )
   );
 
+  getUserTransactions$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.getUserTransactions),
+      switchMap(action =>
+        this.transactionDataService.getTransactions(action.page, action.userIdentifier).pipe(
+          map(res =>
+            UserActions.getUserTransactionsSuccess({
+              transactions: res.data,
+              meta: res.meta
+            })
+          ),
+          catchError(error =>
+            of(UserActions.getUserTransactionsError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private userDataService: UserDataService,
+    private transactionDataService: TransactionDataService,
     private router: Router,
     private ngbModel: NgbModal,
     private toastrService: ToastrService

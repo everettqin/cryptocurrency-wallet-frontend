@@ -1,9 +1,18 @@
-import { UserDataService } from './user-data.service';
 import { UserDispatchers } from './user.dispatchers';
 import { UserSelectors } from './user.selectors';
 
-export const services = [UserDataService, UserDispatchers, UserSelectors];
+import { TransactionDispatchers } from './transaction.dispatchers';
+import { TransactionSelectors } from './transaction.selectors';
 
-export * from './user-data.service';
+export const STORE_SERVICES = [
+  UserDispatchers,
+  UserSelectors,
+  TransactionDispatchers,
+  TransactionSelectors
+];
+
 export * from './user.dispatchers';
 export * from './user.selectors';
+
+export * from './transaction.dispatchers';
+export * from './transaction.selectors';

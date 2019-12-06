@@ -1,0 +1,52 @@
+<div class="table-responsive" *ngIf="transactions$ | async as transactions">
+  <table class="table align-items-center table-flush">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">From / To</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Currency Type</th>
+        <th scope="col">State</th>
+        <th scope="col">Date</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactions">
+        <th>
+          {{ showName(transaction) }}
+        </th>
+        <td class="text-{{ color(transaction) }}">
+          {{ amountPrefix(transaction) }}
+        </td>
+        <td>
+          {{ transaction?.currencyType | uppercase}}
+        </td>
+        <td>
+          {{ transaction?.state | titlecase }}
+        </td>
+        <td>
+          {{ transaction?.createdAt | date: 'short' }}
+        </td>
+        <td class="text-right">
+          <a
+            [routerLink]="['/inside/transactions/', transaction.identifier]"
+            class="btn btn-sm btn-icon-only text-primary"
+          >
+            <i class="far fa-eye"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="card-footer py-4">
+  <ngb-pagination
+    *ngIf="meta$ | async as meta"
+    [(page)]="meta.currentPage"
+    [collectionSize]="meta.totalCount"
+    [maxSize]="4"
+    [boundaryLinks]="true"
+    (pageChange)="getTransactions($event)"
+    class="pagination justify-content-center mb-0"
+  ></ngb-pagination>
+</div>

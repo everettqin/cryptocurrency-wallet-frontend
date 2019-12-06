@@ -8,7 +8,7 @@ import { FieldType } from '@ngx-formly/core';
       type="text"
       mask="AAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA"
       [formControl]="formControl"
-      class="form-control form-control-alternative"
+      class="form-control"
       [formlyAttributes]="field"
       [class.is-invalid]="showError"
     />

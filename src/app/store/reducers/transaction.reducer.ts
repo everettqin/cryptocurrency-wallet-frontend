@@ -1,15 +1,24 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Transaction } from '@app/core';
+import { Transaction, Meta } from '@app/core';
 import * as TransactionActions from '../actions';
 
 export interface TransactionState {
   transactions: Transaction[];
+  currentTransaction?: Transaction;
+  meta: Meta;
   loading: boolean;
   error: boolean;
 }
 
 export const initialState: TransactionState = {
   transactions: [],
+  meta: {
+    currentPage: 0,
+    nextPage: 0,
+    prevPage: 0,
+    totalPages: 0,
+    totalCount: 0
+  },
   loading: false,
   error: false
 };
@@ -39,47 +48,30 @@ const transactionReducer = createReducer(
     loading: false,
     transactions: [...state.transactions, { ...transaction }]
   })),
-  on(TransactionActions.addTransactionError, state => ({ ...state, loading: false })),
-  on(TransactionActions.getTransactions, state => ({ ...state, loading: true })),
-  on(TransactionActions.getTransactionsError, state => ({ ...state, loading: false })),
-  on(TransactionActions.getTransactionsSuccess, (state, { transactions }) => ({
+  on(TransactionActions.addTransactionError, state => ({
     ...state,
-    loading: false,
-    transactions
-  })),
-  on(TransactionActions.deleteTransaction, (state, { transaction }) => ({
-    ...state,
-    loading: false,
-    transactions: state.transactions.filter(h => h !== transaction)
-  })),
-  on(TransactionActions.deleteTransactionSuccess, state => ({ ...state, loading: false })),
-  on(TransactionActions.deleteTransactionError, (state, { error }) => ({
-    ...state,
-    transactions: [...state.transactions, error.requestData],
     loading: false
   })),
-  on(TransactionActions.updateTransaction, (state, { transaction }) => ({
+  on(TransactionActions.getTransactions, state => ({
     ...state,
-    transactions: state.transactions.map(h => {
-      if (h.identifier === transaction.identifier) {
-        state.loading = true;
-      }
-      return h;
-    })
+    loading: true
   })),
-  on(TransactionActions.updateTransactionSuccess, (state, { transaction }) =>
-    modifyTransactionState(state, transaction)
-  ),
-  on(TransactionActions.updateTransactionError, (state, { error }) => ({
+  on(TransactionActions.getTransactionsError, state => ({
     ...state,
-    transactions: state.transactions.map(h => {
-      if (h.identifier === error.requestData.identifier) {
-        // Huh? No idea what the error is!
-        state.error = true;
-      }
-      return h;
-    }),
     loading: false
+  })),
+  on(TransactionActions.getTransactionsSuccess, (state, { transactions, meta }) => ({
+    ...state,
+    loading: false,
+    transactions,
+    meta
+  })),
+  on(TransactionActions.getTransaction, state => ({ ...state, loading: true })),
+  on(TransactionActions.getTransactionError, state => ({ ...state, loading: false })),
+  on(TransactionActions.getTransactionSuccess, (state, { transaction }) => ({
+    ...state,
+    loading: false,
+    currentTransaction: transaction
   })),
   on(TransactionActions.setTransactionLoading, (state, { loading }) => ({
     ...state,

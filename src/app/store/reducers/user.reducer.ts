@@ -1,10 +1,17 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { User, Meta } from '@app/core';
+import { User, Meta, Transaction } from '@app/core';
 import * as UserActions from '../actions';
 
 export interface UserState {
   users: User[];
   currentUser?: User;
+  transactions: {
+    transactions: Transaction[];
+    currentTransaction?: Transaction;
+    meta: Meta;
+    loading: boolean;
+    error: boolean;
+  };
   meta: Meta;
   loading: boolean;
   error: boolean;
@@ -17,7 +24,19 @@ export const initialState: UserState = {
     nextPage: 0,
     prevPage: 0,
     totalPages: 0,
-    totalCount: 0,
+    totalCount: 0
+  },
+  transactions: {
+    transactions: [],
+    meta: {
+      currentPage: 0,
+      nextPage: 0,
+      prevPage: 0,
+      totalPages: 0,
+      totalCount: 0
+    },
+    loading: false,
+    error: false
   },
   loading: false,
   error: false
@@ -90,7 +109,33 @@ const userReducer = createReducer(
   on(UserActions.setUserLoading, (state, { loading }) => ({
     ...state,
     loading: loading == null ? true : loading
-  }))
+  })),
+  on(UserActions.getUserTransactions, state => ({
+    ...state,
+    transactions: {
+      ...state.transactions,
+      loading: true
+    }
+  })),
+  on(UserActions.getUserTransactionsError, state => ({
+    ...state,
+    transactions: {
+      ...state.transactions,
+      loading: false
+    }
+  })),
+  on(
+    UserActions.getUserTransactionsSuccess,
+    (state, { transactions, meta }) => ({
+      ...state,
+      transactions: {
+        ...state.transactions,
+        loading: false,
+        transactions,
+        meta
+      }
+    })
+  )
 );
 
 export function reducer(state: UserState | undefined, action: Action) {

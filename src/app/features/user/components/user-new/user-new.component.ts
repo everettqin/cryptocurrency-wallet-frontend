@@ -1,6 +1,4 @@
-import {
-  Component
-} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 // app
@@ -18,7 +16,6 @@ import { UserDispatchers } from '@app/store';
   templateUrl: './user-new.component.html'
 })
 export class UserNewComponent extends AppBaseComponent {
-
   form = new FormGroup({});
   newUser: any = {
     name: '',
@@ -44,8 +41,8 @@ export class UserNewComponent extends AppBaseComponent {
         maxLength: 1000
       },
       validators: {
-        validation: ['email'],
-      },
+        validation: ['email']
+      }
     },
     {
       key: 'description',
@@ -59,8 +56,8 @@ export class UserNewComponent extends AppBaseComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private userDispatchers: UserDispatchers,
-    private toastrService: ToastrService) {
+    private userDispatchers: UserDispatchers
+  ) {
     super();
   }
 

@@ -23,4 +23,8 @@ export class UserDispatchers {
   getUser(identifier: string) {
     this.store.dispatch(UserAction.getUser({identifier}));
   }
+
+  getUserTransactions(page: number, userIdentifier: string) {
+    this.store.dispatch(UserAction.getUserTransactions({page, userIdentifier}));
+  }
 }
