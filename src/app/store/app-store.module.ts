@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { services } from './services';
+import { STORE_SERVICES } from './services';
 import { effects } from './effects';
 import { reducers } from './reducers';
 
@@ -14,7 +14,7 @@ import { reducers } from './reducers';
     StoreModule.forFeature('entityCache', reducers),
     EffectsModule.forFeature(effects)
   ],
-  providers: [...services],
+  providers: [...STORE_SERVICES],
   exports: [StoreModule, EffectsModule]
 })
 export class AppStoreModule {}

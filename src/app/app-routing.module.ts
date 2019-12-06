@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {InsideComponent} from './core';
+
+// App
+import { InsideComponent } from './core';
+import { UsersComponent, UserComponent } from './features/user/containers';
+import {
+  TransactionsComponent,
+  TransactionComponent
+} from './features/transaction/containers';
 
 const routes: Routes = [
   {
@@ -9,11 +16,29 @@ const routes: Routes = [
     children: [
       {
         path: 'users',
-        loadChildren: './features/users/users.module#UsersModule'
+        children: [
+          {
+            path: '',
+            component: UsersComponent
+          },
+          {
+            path: ':identifier',
+            component: UserComponent
+          }
+        ]
       },
       {
         path: 'transactions',
-        loadChildren: './features/transactions/transactions.module#TransactionsModule'
+        children: [
+          {
+            path: '',
+            component: TransactionsComponent
+          },
+          {
+            path: ':identifier',
+            component: TransactionComponent
+          }
+        ]
       },
       {
         path: '',

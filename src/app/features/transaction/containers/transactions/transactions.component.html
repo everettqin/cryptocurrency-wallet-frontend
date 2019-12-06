@@ -12,45 +12,55 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col-8">
-              <h3 class="mb-0">Overview</h3>
+              <h3 class="mb-0">Transaction Overview</h3>
             </div>
             <div class="col-4 text-right">
-              <button class="btn btn-sm btn-icon-only text-primary" (click)="newUser()">
+              <button
+                class="btn btn-sm btn-icon-only text-primary"
+                (click)="newTransaction()"
+              >
                 <i class="fas fa-plus-circle fa-lg"></i>
               </button>
             </div>
           </div>
         </div>
-        <div class="table-responsive" *ngIf="users$ | async as users">
+        <div
+          class="table-responsive"
+          *ngIf="transactions$ | async as transactions"
+        >
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Bitcoin wallet balance</th>
-                <th scope="col">Ethereum wallet balance</th>
+                <th scope="col">Source User</th>
+                <th scope="col">Target User</th>
+                <th scope="col">Amount</th>
+                <th scope="col">State</th>
+                <th scope="col">Create at</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of users">
+              <tr *ngFor="let transaction of transactions">
                 <th>
-                  {{ user.name }}
+                  {{ transaction?.sourceUser?.name }}
                 </th>
                 <th>
-                  {{ user.email }}
+                  {{ transaction?.targetUser?.name }}
                 </th>
                 <td>
-                  {{ user.bitcoinWalletBalance }}
+                  {{ transaction?.amount }}
                 </td>
                 <td>
-                  {{ user.ethereumWalletBalance }}
+                  {{ transaction?.state | titlecase}}
+                </td>
+                <td>
+                  {{ transaction?.createdAt | date:'short'}}
                 </td>
                 <td class="text-right">
                   <a
-                    [routerLink]="[user.identifier]"
+                    [routerLink]="[transaction.identifier]"
                     class="btn btn-sm btn-icon-only text-primary"
-                    ><i class="fas fa-edit fa-lg"></i
+                    ><i class="fas fa-eye fa-lg"></i
                   ></a>
                 </td>
               </tr>
@@ -61,11 +71,10 @@
           <ngb-pagination
             *ngIf="meta$ | async as meta"
             [(page)]="meta.currentPage"
-            [pageSize]="meta.totalPages"
             [collectionSize]="meta.totalCount"
             [maxSize]="5"
             [boundaryLinks]="true"
-            (pageChange)="getUsers($event)"
+            (pageChange)="getTransactions($event)"
             class="pagination justify-content-center mb-0"
           ></ngb-pagination>
         </div>

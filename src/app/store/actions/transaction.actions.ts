@@ -8,7 +8,10 @@ export const createTransactionAction = (actionType: string) =>
 export const createTransactionErrorAction = (actionType: string) =>
   createAction(actionType, props<{ error: DataServiceError<Transaction> }>());
 
-export const getTransactions = createAction('[Transaction] GET_TRANSACTIONS');
+export const getTransactions = createAction(
+  '[Transaction] GET_TRANSACTIONS',
+  props<{ page: number }>()
+);
 
 export const getTransactionsSuccess = createAction(
   '[Transaction] GET_TRANSACTIONS_SUCCESS',
@@ -34,7 +37,7 @@ export const addTransactionError = createTransactionErrorAction(
 
 export const getTransaction = createAction(
   '[Transaction] GET_TRANSACTION',
-  props<{ id: string }>()
+  props<{ identifier: string }>()
 );
 
 export const getTransactionSuccess = createTransactionAction(
@@ -43,30 +46,6 @@ export const getTransactionSuccess = createTransactionAction(
 
 export const getTransactionError = createTransactionErrorAction(
   '[Transaction] GET_TRANSACTION_ERROR'
-);
-
-export const updateTransaction = createTransactionAction(
-  '[Transaction] UPDATE_TRANSACTION'
-);
-
-export const updateTransactionSuccess = createTransactionAction(
-  '[Transaction] UPDATE_TRANSACTION_SUCCESS'
-);
-
-export const updateTransactionError = createTransactionErrorAction(
-  '[Transaction] UPDATE_TRANSACTION_ERROR'
-);
-
-export const deleteTransaction = createTransactionAction(
-  '[Transaction] DELETE_TRANSACTION'
-);
-
-export const deleteTransactionSuccess = createTransactionAction(
-  '[Transaction] DELETE_TRANSACTION_SUCCESS'
-);
-
-export const deleteTransactionError = createTransactionErrorAction(
-  '[Transaction] DELETE_TRANSACTION_ERROR'
 );
 
 export const setTransactionLoading = createAction(

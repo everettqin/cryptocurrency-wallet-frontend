@@ -1,0 +1,74 @@
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body"></div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">User Overview</h3>
+            </div>
+            <div class="col-4 text-right">
+              <button class="btn btn-sm btn-icon-only text-primary" (click)="newUser()">
+                <i class="fas fa-plus-circle fa-lg"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive" *ngIf="users$ | async as users">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Bitcoin wallet balance</th>
+                <th scope="col">Ethereum wallet balance</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <th>
+                  {{ user.name }}
+                </th>
+                <th>
+                  {{ user.email }}
+                </th>
+                <td>
+                  {{ user.bitcoinWalletBalance }}
+                </td>
+                <td>
+                  {{ user.ethereumWalletBalance }}
+                </td>
+                <td class="text-right">
+                  <a
+                    [routerLink]="[user.identifier]"
+                    class="btn btn-sm btn-icon-only text-primary"
+                    ><i class="fas fa-edit fa-lg"></i
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4">
+          <ngb-pagination
+            *ngIf="meta$ | async as meta"
+            [(page)]="meta.currentPage"
+            [collectionSize]="meta.totalCount"
+            [maxSize]="5"
+            [boundaryLinks]="true"
+            (pageChange)="getUsers($event)"
+            class="pagination justify-content-center mb-0"
+          ></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

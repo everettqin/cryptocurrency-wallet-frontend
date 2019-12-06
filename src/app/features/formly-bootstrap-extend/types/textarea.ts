@@ -9,7 +9,7 @@ import { FieldType } from '@ngx-formly/core';
       [formControl]="formControl"
       [cols]="to.cols"
       [minRows]="to.rows"
-      class="form-control form-control-alternative"
+      class="form-control"
       [class.is-invalid]="showError"
       [formlyAttributes]="field"
     >

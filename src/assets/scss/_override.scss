@@ -1,6 +1,13 @@
-
 .form-control {
   &.is-invalid {
-    box-shadow: 0 1px 3px rgba(251, 99, 64, 0.9), 0 1px 0 rgba(255, 0, 0, 0.1);
+    border-color: rgb(251, 99, 64);
+  }
+}
+
+.ng-select {
+  &.ng-invalid.ng-dirty {
+    .ng-select-container {
+      border-color: rgb(251, 99, 64);
+    }
   }
 }

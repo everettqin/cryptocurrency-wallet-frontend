@@ -28,10 +28,12 @@ export class InflectorInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (req.body && typeof req.body !== 'object') {
+    if (req.body && typeof req.body === 'object') {
+      console.log('ob', req.body, typeof req.body);
+      console.log(snakeCaseKeys({ amount: 0, sourceUserId: '123' }));
       req = req.clone({
-        body: snakeCaseKeys(JSON.parse(req.body))
-      });
+          body: snakeCaseKeys(req.body)
+        });
     }
 
     if (req.params) {

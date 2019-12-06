@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User, DataServiceError, Meta } from '@app/core';
+import { User, DataServiceError, Meta, Transaction } from '@app/core';
 
 export const createUserAction = (actionType: string) =>
   createAction(actionType, props<{ user: User }>());
@@ -29,7 +29,10 @@ export const addUserSuccess = createUserAction('[User] ADD_USER_SUCCESS');
 
 export const addUserError = createUserErrorAction('[User] ADD_USER_ERROR');
 
-export const getUser = createAction('[User] GET_USER', props<{ identifier: string }>());
+export const getUser = createAction(
+  '[User] GET_USER',
+  props<{ identifier: string }>()
+);
 
 export const getUserSuccess = createUserAction('[User] GET_USER_SUCCESS');
 
@@ -46,4 +49,19 @@ export const updateUserError = createUserErrorAction(
 export const setUserLoading = createAction(
   '[User] SET_USER_LOADING',
   props<{ loading: boolean }>()
+);
+
+export const getUserTransactions = createAction(
+  '[User] GET_TRANSACTIONS',
+  props<{ page: number, userIdentifier: string }>()
+);
+
+export const getUserTransactionsSuccess = createAction(
+  '[User] GET_TRANSACTIONS_SUCCESS',
+  props<{ transactions: Transaction[]; meta: Meta }>()
+);
+
+export const getUserTransactionsError = createAction(
+  '[User] GET_TRANSACTIONS_ERROR',
+  props<{ error: any }>()
 );

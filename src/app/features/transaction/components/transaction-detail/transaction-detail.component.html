@@ -1,0 +1,49 @@
+<div class="pl-lg-4">
+  <div class="form-group">
+    <label class="form-control-label">Source User</label>
+    <p>
+      <a [routerLink]="['/inside/users', transaction?.sourceUserId]">{{
+        transaction?.sourceUser.name
+      }}</a>
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="form-control-label">Target User</label>
+    <p>
+      <a [routerLink]="['/inside/users', transaction?.targetUser]">{{
+        transaction?.targetUser.name
+      }}</a>
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="form-control-label">Amount</label>
+    <p>
+      {{ transaction?.amount }}
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="form-control-label">Currency Type</label>
+    <p>
+      {{ transaction?.currencyType | uppercase }}
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="form-control-label">State</label>
+    <p>
+      {{ transaction?.state | titlecase }}
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="form-control-label">Created at</label>
+    <p>
+      {{ transaction?.createdAt | date: 'short' }}
+    </p>
+  </div>
+  <div class="form-group">
+    <label class="form-control-label">Processed at</label>
+    <p>
+      {{ transaction?.processedAt | date: 'short' }}
+    </p>
+  </div>
+</div>
+<!-- <ngx-json-viewer [json]="transaction"></ngx-json-viewer> -->

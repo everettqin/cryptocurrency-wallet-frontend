@@ -6,10 +6,13 @@ import {
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { catchError, delay, map } from 'rxjs/operators';
-import { User, Response, DataServiceError } from '@app/core';
+import { User, Response } from '@app/core/models/';
+import {DataServiceError} from '@app/core/errors/data-service';
 import { environment } from '@env/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserDataService {
   constructor(private http: HttpClient) {}
 
@@ -19,8 +22,8 @@ export class UserDataService {
       .pipe(catchError(this.handleError(user)));
   }
 
-  getUsers(page: number): Observable<Response> {
-    const params = new HttpParams().set('page', page.toString());
+  getUsers(page: number, query: string = ''): Observable<Response> {
+    const params = new HttpParams().set('page', page.toString()).set('query', query);
     return this.http
       .get<Response>(`${environment.api}/users`, { params })
       .pipe(catchError(this.handleError()));

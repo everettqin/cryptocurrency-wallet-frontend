@@ -1,14 +1,17 @@
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserNewComponent } from './user-new/user-new.component';
+import { UserTransactionsComponent } from './user-transactions/user-transactions.component';
 
-export const USERS_COMPONENTS = [
+export const USER_COMPONENTS = [
     UserFormComponent,
-    UserNewComponent
+    UserNewComponent,
+    UserTransactionsComponent
 ];
 
-export const USERS_ENTRY_COMPONENTS = [
+export const USER_ENTRY_COMPONENTS = [
     UserNewComponent
 ];
 
 export * from './user-form/user-form.component';
 export * from './user-new/user-new.component';
+export * from './user-transactions/user-transactions.component';

@@ -1,0 +1,42 @@
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body"></div>
+  </div>
+</div>
+<div class="container-fluid mt--7" *ngIf="transaction$ | async as transaction">
+  <div class="row">
+    <div class="col-xl-6">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Account details</h3>
+            </div>
+            <div class="col-4 text-right">
+              <a
+                [routerLink]="['/inside/transactions']"
+                class="btn btn-sm btn-info"
+                >Back</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <app-transaction-detail
+            [transaction]="transaction"
+          ></app-transaction-detail>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 mb-5 mb-xl-0">
+      <div class="card shadow">
+        <div class="card-header border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+            <h3 class="mb-0">History</h3>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

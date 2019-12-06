@@ -1,7 +1,7 @@
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
 
-export const USERS_CONTAINERS = [
+export const USER_CONTAINERS = [
   UserComponent,
   UsersComponent
 ];
