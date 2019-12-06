@@ -7,15 +7,23 @@ import { throwIfAlreadyLoaded } from './utils/angular';
 // configs
 import { HttpConfigModule } from './config/http.config';
 import { FormConfigModule } from './config/form.config';
+import { UIConfigModule } from './config/ui.config';
+import { AuthConfigModule } from './config/auth.config';
 
 // components
 import { CORE_CONTAINERS } from './containers';
 import { CORE_COMPONENTS } from './components';
-import { UIConfigModule } from './config/ui.config';
+
 
 @NgModule({
   declarations: [...CORE_CONTAINERS, ...CORE_COMPONENTS],
-  imports: [HttpConfigModule, FormConfigModule, UIConfigModule, SharedModule]
+  imports: [
+    HttpConfigModule,
+    FormConfigModule,
+    UIConfigModule,
+    AuthConfigModule,
+    SharedModule
+  ]
 })
 export class CoreModule {
   constructor(

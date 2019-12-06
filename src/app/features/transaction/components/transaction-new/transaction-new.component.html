@@ -1,20 +1,18 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="modal-header bg-secondary">
-      <h4 class="modal-title">New transaction</h4>
-  
-    </div>
-    <div class="modal-body bg-secondary">
-      <formly-form
-        [form]="form"
-        [fields]="fields"
-        [options]="options"
-        [model]="newTransaction"
-      ></formly-form>
-    </div>
-    <div class="modal-footer bg-secondary">
-      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
-        Create
-      </button>
-    </div>
-  </form>
-  
+  <div class="modal-header bg-secondary">
+    <h4 class="modal-title">New transaction</h4>
+  </div>
+  <div class="modal-body bg-secondary">
+    <formly-form
+      [form]="form"
+      [fields]="fields"
+      [options]="options"
+      [model]="newTransaction"
+    ></formly-form>
+  </div>
+  <div class="modal-footer bg-secondary">
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
+      Create
+    </button>
+  </div>
+</form>

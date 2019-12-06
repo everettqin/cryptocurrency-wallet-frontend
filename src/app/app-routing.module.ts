@@ -2,17 +2,25 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // App
-import { InsideComponent } from './core';
+import { InsideComponent, OutsideComponent, AuthResolver } from './core';
 import { UsersComponent, UserComponent } from './features/user/containers';
 import {
   TransactionsComponent,
   TransactionComponent
 } from './features/transaction/containers';
 
+// Libs
+import { AngularTokenService } from 'angular-token';
+import { SignInComponent } from './features/auth/containers/sign-in/sign-in.component';
+
 const routes: Routes = [
   {
     path: 'inside',
     component: InsideComponent,
+    canActivate: [AngularTokenService],
+    resolve: {
+      currentUser: AuthResolver
+    },
     children: [
       {
         path: 'users',
@@ -47,10 +55,21 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: 'auth',
-  //   loadChildren: './features/auth#AuthModule'
-  // },
+  {
+    path: 'outside',
+    component: OutsideComponent,
+    children: [
+      {
+        path: 'auth',
+        children: [
+          {
+            path: 'sign-in',
+            component: SignInComponent
+          }
+        ]
+      }
+    ]
+  },
   {
     path: '',
     redirectTo: '/inside/users',

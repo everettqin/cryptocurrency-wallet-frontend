@@ -9,9 +9,7 @@ import {
 } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-// import { AuthService } from './auth/auth.service';
 import { Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 
 // change case libs
 import * as changeCase from 'change-case';
@@ -29,8 +27,6 @@ export class InflectorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (req.body && typeof req.body === 'object') {
-      console.log('ob', req.body, typeof req.body);
-      console.log(snakeCaseKeys({ amount: 0, sourceUserId: '123' }));
       req = req.clone({
           body: snakeCaseKeys(req.body)
         });
