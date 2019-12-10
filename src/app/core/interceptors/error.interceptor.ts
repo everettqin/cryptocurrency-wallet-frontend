@@ -8,15 +8,11 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-// import { Store } from '@ngxs/store';
-// import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  // static snackBarConfig: MatSnackBarConfig = <MatSnackBarConfig>{
-  //   duration: 10000
-  // };
+
   constructor(private toastrService: ToastrService) {}
 
   intercept(
@@ -34,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
     if (errors) {
       for (let key in errors) {
-        this.toastrService.error(key + ' ' + errors[key]);
+        this.toastrService.error(errors[key]);
       }
     }
 

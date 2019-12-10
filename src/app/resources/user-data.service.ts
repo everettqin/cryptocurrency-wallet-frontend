@@ -7,40 +7,53 @@ import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { catchError, delay, map } from 'rxjs/operators';
 import { User, Response } from '@app/core/models/';
-import {DataServiceError} from '@app/core/errors/data-service';
+import { DataServiceError } from '@app/core/errors/data-service';
 import { environment } from '@env/environment';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserDataService {
+  apiUrl = `${environment.api}/users/`;
+
   constructor(private http: HttpClient) {}
 
   addUser(user: User): Observable<User> {
     return this.http
-      .post<User>(`${environment.api}/users/`, user)
+      .post<User>(this.apiUrl, user)
       .pipe(catchError(this.handleError(user)));
   }
 
   getUsers(page: number, query: string = ''): Observable<Response> {
-    const params = new HttpParams().set('page', page.toString()).set('query', query);
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('query', query);
     return this.http
-      .get<Response>(`${environment.api}/users`, { params })
+      .get<Response>(this.apiUrl, { params })
       .pipe(catchError(this.handleError()));
   }
 
   getUser(identifier: string): Observable<Response> {
     return this.http
-      .get<Response>(`${environment.api}/users/${identifier}`)
+      .get<Response>(`${this.apiUrl}${identifier}`)
       .pipe(catchError(this.handleError()));
   }
 
   updateUser(user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}${user.identifier}`, user).pipe(
+      map(() => user), // return the updated user
+      catchError(this.handleError(user))
+    );
+  }
+
+  validateEmail(email: string): Observable<any> {
+    const params = new HttpParams().set('email', email);
+
     return this.http
-      .put<User>(`${environment.api}/users/${user.identifier}`, user)
+      .get<any>(`${this.apiUrl}/validate_email`, { params })
       .pipe(
-        map(() => user), // return the updated user
-        catchError(this.handleError(user))
+        map(res => res.data),
+        catchError(this.handleError())
       );
   }
 

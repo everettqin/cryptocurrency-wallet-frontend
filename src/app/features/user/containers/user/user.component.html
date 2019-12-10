@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="card-body">
-          <app-user-form [user]="user"></app-user-form>
+          <app-user-form [user]="user"  [loader]="(loading$ | async)"></app-user-form>
         </div>
       </div>
     </div>

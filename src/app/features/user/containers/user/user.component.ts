@@ -25,7 +25,6 @@ export class UserComponent extends AppBaseComponent implements OnInit {
     private route: ActivatedRoute,
     private userDispatchers: UserDispatchers,
     private userSelector: UserSelectors,
-    private modalService: NgbModal
   ) {
     super();
 

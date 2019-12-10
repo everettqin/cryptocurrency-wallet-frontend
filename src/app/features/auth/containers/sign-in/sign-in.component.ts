@@ -19,6 +19,7 @@ export class SignInComponent implements OnInit {
     password: '12345678'
   } as SignInData;
   authData: AuthData;
+  loading: boolean;
   fields: FormlyFieldConfig[] = [
     {
       key: 'login',
@@ -46,20 +47,23 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.authData = this.tokenService.currentAuthData;
+    this.loading = false;
   }
 
   onSubmit() {
-
     this.signInData.login = 'test@test.com';
     this.signInData.password = '12345678';
 
+    this.loading = true;
 
     this.tokenService.signIn(this.signInData).subscribe(
       res => {
+        this.loading = false;
         this.authData = this.tokenService.currentAuthData;
         this.router.navigate(['/inside']);
       },
       error => {
+        this.loading = false;
         this.signInData = {} as SignInData;
       }
     );

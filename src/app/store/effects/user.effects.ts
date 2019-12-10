@@ -36,15 +36,6 @@ export class UserEffects {
     )
   );
 
-  updateUserSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(UserActions.updateUserSuccess),
-        tap(() => this.toastrService.success('User updated successful'))
-      ),
-    { dispatch: false }
-  );
-
   addUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.addUser),
@@ -78,6 +69,15 @@ export class UserEffects {
         )
       )
     )
+  );
+
+  updateUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActions.updateUserSuccess),
+        tap(() => this.toastrService.success('User updated successful'))
+      ),
+    { dispatch: false }
   );
 
   getUserTransactions$ = createEffect(() =>
