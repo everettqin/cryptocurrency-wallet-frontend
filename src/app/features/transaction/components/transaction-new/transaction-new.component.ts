@@ -15,7 +15,6 @@ import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
   templateUrl: './transaction-new.component.html'
 })
 export class TransactionNewComponent extends AppBaseComponent {
-  
   form = new FormGroup({});
   options: FormlyFormOptions = {};
   newTransaction: Transaction = {

@@ -8,6 +8,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { ToastrModule } from 'ngx-toastr';
+import {NgxLoaderIndicatorModule} from 'ngx-loader-indicator'
 
 const MODULES = [
   CommonModule,
@@ -17,7 +18,8 @@ const MODULES = [
   FormlyModule,
   NgbModule,
   NgxJsonViewerModule,
-  ToastrModule
+  ToastrModule,
+  NgxLoaderIndicatorModule
 ];
 
 @NgModule({

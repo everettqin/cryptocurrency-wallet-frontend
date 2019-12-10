@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-        <div class="table-responsive" *ngIf="users$ | async as users">
+        <div class="table-responsive" *ngIf="users$ | async as users"  [loader]="(loading$ | async)">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
@@ -35,16 +35,16 @@
             <tbody>
               <tr *ngFor="let user of users">
                 <th>
-                  {{ user.name }}
+                  {{ user?.name }}
                 </th>
                 <th>
-                  {{ user.email }}
+                  {{ user?.email }}
                 </th>
                 <td>
-                  {{ user.bitcoinWalletBalance }}
+                  {{ user?.bitcoinWalletBalance }}
                 </td>
                 <td>
-                  {{ user.ethereumWalletBalance }}
+                  {{ user?.ethereumWalletBalance }}
                 </td>
                 <td class="text-right">
                   <a

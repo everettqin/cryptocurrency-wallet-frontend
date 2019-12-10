@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 // app
-import { User, AppBaseComponent } from '@app/core';
+import { AppBaseComponent } from '@app/core';
+import { UserDispatchers } from '@app/store';
+import { UserDataService } from '@app/resources';
+import { environment } from '@env/environment';
 
 // ui
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
-
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { UserDispatchers } from '@app/store';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-new',
@@ -40,8 +41,23 @@ export class UserNewComponent extends AppBaseComponent {
         required: true,
         maxLength: 1000
       },
+      modelOptions: {
+        updateOn: 'blur'
+      },
       validators: {
         validation: ['email']
+      },
+      asyncValidators: {
+        uniqueEmail: {
+          expression: (control: FormControl) => {
+            const params = new HttpParams().set('email', control.value);
+            return this.http
+              .get(`${environment.api}/users/validate_email`, { params })
+              .toPromise()
+              .then(res => res['validated']);
+          },
+          message: 'This email is already taken.'
+        }
       }
     },
     {
@@ -56,7 +72,9 @@ export class UserNewComponent extends AppBaseComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private userDispatchers: UserDispatchers
+    private userDispatchers: UserDispatchers,
+    private userDataService: UserDataService,
+    private http: HttpClient
   ) {
     super();
   }

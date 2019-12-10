@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 import { Observable, Subject, concat, of } from 'rxjs';
-import { UserDataService } from '@app/resources';
+import { UserDataService } from '@app/resources/user-data.service';
 import {
   distinctUntilChanged,
   tap,
