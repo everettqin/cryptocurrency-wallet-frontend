@@ -1,0 +1,16 @@
+# Ignore npm config
+/.config
+
+# Ignore npm cache
+/.npm 
+
+# Ignore VS config 
+/.vscode
+
+# Ignore node_modules 
+/node_modules
+
+
+
+
+
