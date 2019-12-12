@@ -13,11 +13,11 @@ import { Observable } from 'rxjs';
 // Lib
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionNewComponent } from '../../../transaction/components';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-transactions',
-  templateUrl: 'user-transactions.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'user-transactions.component.html'
 })
 export class UserTransactionsComponent extends AppBaseComponent
   implements OnInit {
@@ -26,12 +26,14 @@ export class UserTransactionsComponent extends AppBaseComponent
   page: number;
   pageSize: number;
   collectionSize: number;
+  userIdentifier: string;
 
   transactions$: Observable<Transaction[]>;
   loading$: Observable<boolean>;
   meta$: Observable<Meta>;
 
   constructor(
+    private route: ActivatedRoute,
     private userDispatchers: UserDispatchers,
     private userSelectors: UserSelectors,
     private modalService: NgbModal
@@ -44,7 +46,7 @@ export class UserTransactionsComponent extends AppBaseComponent
   }
 
   color(transaction: Transaction) {
-    if (transaction.sourceUser.identifier === this.user.identifier) {
+    if (transaction.sourceUser.identifier === this.userIdentifier) {
       return 'success';
     } else {
       return 'danger';
@@ -52,7 +54,7 @@ export class UserTransactionsComponent extends AppBaseComponent
   }
 
   amountPrefix(transaction: Transaction) {
-    if (transaction.sourceUser.identifier === this.user.identifier) {
+    if (transaction.sourceUser.identifier === this.userIdentifier) {
       return '+ ' + transaction.amount;
     } else {
       return '- ' + transaction.amount;
@@ -60,7 +62,7 @@ export class UserTransactionsComponent extends AppBaseComponent
   }
 
   showName(transaction: Transaction) {
-    if (transaction.sourceUser.identifier === this.user.identifier) {
+    if (transaction.sourceUser.identifier === this.userIdentifier) {
       return transaction.targetUser.name;
     } else {
       return transaction.sourceUser.name;
@@ -68,7 +70,7 @@ export class UserTransactionsComponent extends AppBaseComponent
   }
 
   getTransactions(page: number = 1) {
-    this.userDispatchers.getUserTransactions(page, this.user.identifier);
+    this.userDispatchers.getUserTransactions(page, this.userIdentifier);
   }
 
   newTransaction() {
@@ -76,6 +78,7 @@ export class UserTransactionsComponent extends AppBaseComponent
   }
 
   ngOnInit() {
+    this.userIdentifier = this.route.snapshot.paramMap.get('identifier');
     this.getTransactions();
   }
 }
