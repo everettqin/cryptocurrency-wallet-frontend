@@ -1,5 +1,5 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-import { createGenericTestComponent } from '../../../../core/src/lib/test-utils';
+import { createGenericTestComponent } from '../utils/test-utils';
 import { By } from '@angular/platform-browser';
 
 import { Component, ViewChild } from '@angular/core';
@@ -90,7 +90,7 @@ describe('ui-bootstrap: Formly Field Select Component', () => {
 
 @Component({selector: 'formly-form-test', template: '', entryComponents: []})
 class TestComponent {
-  @ViewChild(FormlyForm) formlyForm: FormlyForm;
+  @ViewChild(FormlyForm, {static: false}) formlyForm: FormlyForm;
 
   fields = testComponentInputs.fields;
   form = testComponentInputs.form;
